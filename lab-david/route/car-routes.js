@@ -37,36 +37,19 @@ module.exports = function(router){
     try{
       var car = new Car(req.body.make, req.body.model, req.body.year);
       storage.createItem('car', car);
-      res.writeHead(200, {
-        'Content-Type': 'text/plain',
-      });
-      res.write(JSON.stringify(car));
-      res.end();
+      response.sendJSON(res, 200, car);
     } catch(err) {
-      console.error(err);
-      res.writeHead(400, {
-        'Content-Type': 'text/plain',
-      });
-      res.write('bad request');
-      res.end();
+      response.sendText(res, 400, 'bad request');
     }
   });
 
   router.delete('/api/car', function(req,res){
     if(req.url.query.id){
       storage.deleteItem('car', req.url.query.id).then((ans) => {
-        res.writeHead(204, {
-          'Content-Type': 'text/plain',
-        });
-        res.write(JSON.stringify(ans));
-        res.end();
+        response.sendJSON(res, 204, ans);
       }).catch(err => {
         console.error(err);
-        res.writeHead(404, {
-          'Content-Type': 'text/plain',
-        });
-        res.write('route not found');
-        res.end();
+        response.sendText(res, 404, 'route not found');
       });
     }
     return;
