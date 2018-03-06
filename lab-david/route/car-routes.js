@@ -11,7 +11,6 @@ module.exports = function(router){
       storage.fetchItem('car', req.url.query.id).then(car => {
         response.sendJSON(res, 200, car);
       }).catch(err => {
-        console.error(err);
         response.sendText(res, 404, 'route not found');
       });
       return;
@@ -26,7 +25,6 @@ module.exports = function(router){
       storage.listItemIds('car').then(list => {
         response.sendJSON(res, 200, list);
       }).catch(err => {
-        console.error(err);
         response.sendText(res, 404, 'route not found');
       });
       return;
@@ -48,7 +46,6 @@ module.exports = function(router){
       storage.deleteItem('car', req.url.query.id).then((ans) => {
         response.sendJSON(res, 204, ans);
       }).catch(err => {
-        console.error(err);
         response.sendText(res, 404, 'route not found');
       });
     }

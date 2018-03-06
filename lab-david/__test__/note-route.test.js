@@ -58,9 +58,12 @@ describe('Car Routes', () => {
     });
     it('should return a list of storage ids', (done) => {
       request.get('localhost:3000/api/car').end((err,res) => {
+        let ansArr = []
+        ansArr.push(`${car.id}.json`);
+        ansArr.push('placeholder.txt');
         expect(err).toBe(null);
         expect(res.status).toEqual(200);
-        expect(JSON.parse(res.text)).toEqual([`${car.id}.json`]);
+        expect(JSON.parse(res.text)).toEqual(ansArr);
         done();
       });
     });

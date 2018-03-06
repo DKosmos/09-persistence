@@ -41,7 +41,6 @@ Router.prototype.route = function(){
       }
       response.sendText(res, 404, 'route not found');
     }).catch( err => {
-      console.error(err);
       response.sendText(res, 400, 'bad request');
     });
   };
